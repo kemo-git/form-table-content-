@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form page</title>
+    <style>
+      * {
+        background-color: brown;
+      }
+      /* start variables */
+      :root {
+        --mainWidth: 400px;
+        --mainColor: wheat;
+        --borderRadius: 6px;
+      }
+      /* end variables */
+
+      .formBox {
+        border: 1px solid white;
+        border-radius: var(--borderRadius);
+        width: var(--mainWidth);
+        height: fit-content;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        padding: 10px;
+      }
+      div input {
+        width: var(--mainWidth);
+        height: 20px;
+        border: 1px solid var(--mainColor);
+        border-radius: 6px;
+        margin: 0 4px 10px 0;
+        background-color: white;
+      }
+      form input#Uname:invalid {
+        border: 2px solid yellow;
+      }
+      input#Uname,
+      form input#Uname:valid {
+        border: 2px solid black;
+      }
+      #UnameError {
+        background-color: white;
+        border: 1px black solid;
+        border-radius: 6px;
+        text-align: center;
+        font-size: large;
+        width: fit-content;
+        margin: 15px auto;
+        padding: 6px;
+      }
+      #UageError {
+        background-color: white;
+        border: 1px black solid;
+        border-radius: 6px;
+        text-align: center;
+        font-size: large;
+        width: fit-content;
+        margin: 15px auto;
+        padding: 6px;
+      }
+      form input#Uage:invalid {
+        border: 2px solid yellow;
+      }
+      input#Uage,
+      form input#Uage:valid {
+        border: 2px solid black;
+      }
+      form #Uage {
+        margin: 0 4px 0 0;
+      }
+      form label {
+        color: var(--mainColor);
+        font-size: 20px;
+        font-weight: 600;
+        padding: 4px 4px 10px 10px;
+      }
+
+      #btn {
+        font-size: 16px;
+        font-weight: 600;
+        width:fit-content;
+        height: fit-content;
+        margin-top: 15px;
+        background-color: white;
+        border: 1px solid var(--mainColor);
+        border-radius: var(--borderRadius);
+        color: brown;
+        padding: 8px;
+      }
+      /* start table */
+      table {
+        margin-top: 50px;
+        width: calc(var(--mainWidth) + 20px);
+        border: 1px solid white;
+        border-radius: var(--borderRadius);
+      }
+      table th {
+        color: var(--mainColor);
+        font-size: 23px;
+      }
+      table tr {
+        color: white;
+        border-top: 1px solid white;
+        text-align: center;
+      }
+      table th {
+        color: wheat;
+        font-size: large;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- start form -->
+    <div class="formBox">
+      <form method="dialog">
+        <label for="Uname">Username</label>
+        <br />
+        <input
+          type="text"
+          name="Username"
+          placeholder="enter valid name 1-3 small letters"
+          id="Uname"
+          required
+          pattern="[a-z]{1,3}"
+          title=" by html attribute enter 1/3 letters fram a to z" />
+        <!--  -->
+        <!-- the first method by these attributes but can not customize the message style -->
+        <br />
+        <label for="Uage">Age(Years)</label>
+        <br />
+        <input
+          type="number"
+          placeholder="entet age in years"
+          id="Uage"
+          required
+          pattern="[0-9]{1,2}" />
+        <br />
+        <button id="btn" onclick="addRow()">add user</button>
+      </form>
+    </div>
+    <!-- end form -->
+    <!-- start table -->
+    <table id="show">
+      <tr>
+        <th>Username</th>
+        <th>Age(Years)</th>
+        <th>del</th>
+      </tr>
+    </table>
+    <!-- js -->
+    <script>
+      //create hidden div
+      var inpput = document.getElementById("Uname");
+      var ageInppur = document.getElementById("Uage");
+      var fform = document.querySelector("form");
+
+      var hiddDiv = document.createElement("div");
+      hiddDiv.id = "UnameError";
+      hiddDiv.style.display = "none";
+      fform.appendChild(hiddDiv);
+
+      var hiddAge = document.createElement("div");
+      hiddAge.id = "UageError";
+      hiddAge.style.display = "none";
+      fform.appendChild(hiddAge);
+
+      // //writing error text
+      inpput.oninvalid = function (elm) {
+        // elm.target.setCustomValidity("by js enter 1-3 letters from a to z"); //to customize text in default message error =>equal to pattern attribute
+        elm.preventDefault();
+        hiddDiv.style.display = "block";
+        hiddDiv.textContent =
+          "invalid username ,please enter 1-3 small letters ";
+      };
+      ageInppur.oninvalid = function (elm) {
+        // elm.target.setCustomValidity("by js enter 1-3 letters from a to z"); //to customize text in default message error =>equal to pattern attribute
+        elm.preventDefault();
+        hiddAge.style.display = "flex";
+        hiddAge.textContent = "invalid age ,please enter numbers only ";
+      };
+      // --------------------------
+      var list1 = [];
+      var list2 = [];
+
+      var n = 1;
+      var x = 0;
+
+      function addRow() {
+        var currRow = document.getElementById("show");
+        var newRow = currRow.insertRow(n);
+
+        list1[x] = document.getElementById("Uname").value;
+        list2[x] = document.getElementById("Uage").value;
+
+        var cel1 = newRow.insertCell(0);
+        var cel2 = newRow.insertCell(1);
+        x;
+        cel1.innerHTML = list1[x];
+        cel2.innerHTML = list2[x];
+
+        n++;
+        x++;
+      }
+    </script>
+  </body>
+</html>
