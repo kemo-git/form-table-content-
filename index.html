@@ -82,7 +82,7 @@
       #btn {
         font-size: 16px;
         font-weight: 600;
-        width:fit-content;
+        width: fit-content;
         height: fit-content;
         margin-top: 15px;
         background-color: white;
@@ -110,6 +110,15 @@
       table th {
         color: wheat;
         font-size: large;
+      }
+
+      #delBtn {
+        color: white;
+        font-size: large;
+        border-radius: 6px;
+        margin: 10px auto;
+        translate: 150px;
+
       }
     </style>
   </head>
@@ -148,9 +157,9 @@
       <tr>
         <th>Username</th>
         <th>Age(Years)</th>
-        <th>del</th>
       </tr>
     </table>
+    <input id="delBtn" type="button" value="delete" onclick="delRow(this)" />
     <!-- js -->
     <script>
       //create hidden div
@@ -198,13 +207,18 @@
 
         var cel1 = newRow.insertCell(0);
         var cel2 = newRow.insertCell(1);
-        x;
+
         cel1.innerHTML = list1[x];
         cel2.innerHTML = list2[x];
 
         n++;
         x++;
       }
+
+      function delRow() {
+        document.getElementById("show").deleteRow(-1);
+      }
+      
     </script>
   </body>
 </html>
